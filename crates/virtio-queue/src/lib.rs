@@ -535,7 +535,7 @@ impl<M: GuestAddressSpace> Queue<M> {
 
     /// Reads the `idx` field from the available ring.
     pub fn avail_idx(&self, order: Ordering) -> Result<Wrapping<u16>, Error> {
-        let addr = self.avail_ring.unchecked_add(2);
+        let addr = self.used_ring.unchecked_add(2);
         self.mem
             .memory()
             .load(addr, order)
